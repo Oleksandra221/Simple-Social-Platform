@@ -36,8 +36,8 @@ public class UserProfile{
     @JoinTable(name = "emojis",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "emoji_id"))
-
     private List<Emojis> emojis;
+
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<ProfileImages> profile_images;
 
@@ -46,6 +46,18 @@ public class UserProfile{
 
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<BackgroundImage> background_images;
+
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+//    @JoinTable(name = "news",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "news_id"))
+    private List<News> news;
+
+    @OneToOne(mappedBy = "userProfile",cascade = CascadeType.ALL)
+    public Followers followers;
+
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+    private List<Feedback> feedbacks;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -120,6 +132,21 @@ public class UserProfile{
 
     public void setProfile_images(List<ProfileImages> profile_images) {
         this.profile_images = profile_images;
+    }
+    public List<News> getNews() {
+        return news;
+    }
+
+    public void setNews(List<News> news) {
+        this.news = news;
+    }
+
+    public Followers getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Followers followers) {
+        this.followers = followers;
     }
 }
 
