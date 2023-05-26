@@ -24,7 +24,7 @@ public class PostImageService {
         System.out.println("Post image added!");
     }
 
-    public Iterable<PostImage> getAllProfileImages() {
+    public Iterable<PostImage> getAllPostImages() {
         return postImageRepository.findAll();
     }
 }

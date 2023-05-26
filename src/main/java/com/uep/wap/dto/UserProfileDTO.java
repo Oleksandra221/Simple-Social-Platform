@@ -1,6 +1,9 @@
 package com.uep.wap.dto;
 
+import com.uep.wap.model.BackgroundImage;
 import com.uep.wap.model.Emojis;
+import com.uep.wap.model.PostImage;
+import com.uep.wap.model.ProfileImages;
 
 import java.sql.Date;
 import java.util.List;
@@ -9,6 +12,9 @@ public class UserProfileDTO {
 
      private long id;
 
+     private String name;
+
+     private String surname;
      private String username;
 
      private String description;
@@ -22,6 +28,12 @@ public class UserProfileDTO {
      private String password; // zaimplementowac haszowanie hasla
 
      private List<Emojis> emojis;
+
+     private List<ProfileImages> profile_images;
+
+     private List<PostImage> post_images;
+
+     private List<BackgroundImage> background_images;
 
      public long getId() {
           return id;
@@ -77,5 +89,53 @@ public class UserProfileDTO {
 
      public void setPassword(String password) {
           this.password = password;
+     }
+
+     public String getName() {
+          return name;
+     }
+
+     public void setName(String name) {
+          this.name = name;
+     }
+
+     public String getSurname() {
+          return surname;
+     }
+
+     public void setSurname(String surname) {
+          this.surname = surname;
+     }
+
+     public List<Emojis> getEmojis() {
+          return emojis;
+     }
+
+     public void setEmojis(List<Emojis> emojis) {
+          this.emojis = emojis;
+     }
+
+     public List<ProfileImages> getProfile_images() {
+          return profile_images;
+     }
+
+     public void setProfile_images(List<ProfileImages> profile_images) {
+          this.profile_images = profile_images;
+     }
+
+     public List<PostImage> getPost_images() {
+          return post_images;
+     }
+
+     public void setPost_images(List<PostImage> post_images) {
+          this.post_images = post_images;
+     }
+
+     public List<BackgroundImage> getBackground_images() {
+          return background_images;
+     }
+
+     public void setBackground_images(List<BackgroundImage> background_images) {
+          this.background_images = background_images;
      }
 }

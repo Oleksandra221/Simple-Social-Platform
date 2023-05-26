@@ -21,7 +21,7 @@ public class BackgroundImageService {
         System.out.println("Background image added!");
     }
 
-    public Iterable<BackgroundImage> getAllProfileImages() {
+    public Iterable<BackgroundImage> getAllBackgroundImages() {
         return backgroundImagesRepository.findAll();
     }
 }

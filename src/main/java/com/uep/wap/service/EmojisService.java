@@ -10,7 +10,7 @@ public class EmojisService {
     private EmojisRepository emojisRepository;
 
     // To DO: to figure out how to add emojis
-    public void addUser(EmojisDTO emojisDTO) {
+    public void addEmoji(EmojisDTO emojisDTO) {
         Emojis emojis = new Emojis();
         emojis.setSet_emoji_name(emojisDTO.getSet_emoji_name());
         emojis.setPrice(emojisDTO.getPrice());
@@ -20,7 +20,7 @@ public class EmojisService {
         System.out.println("Emojis added!");
     }
 
-    public Iterable<Emojis> getAllUsers() {
+    public Iterable<Emojis> getAllEmojis() {
         return emojisRepository.findAll();
     }
 }

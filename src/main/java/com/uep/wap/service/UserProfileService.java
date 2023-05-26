@@ -15,6 +15,8 @@ public class UserProfileService {
     // To DO: to figure out how to add emojis
     public void addUser(UserProfileDTO userProfileDTO) {
         UserProfile user = new UserProfile();
+        user.setName(userProfileDTO.getName());
+        user.setSurname(userProfileDTO.getSurname());
         user.setUsername(userProfileDTO.getUsername());
         user.setDescription(userProfileDTO.getDescription());
 //        user.setPremiumAccount(userProfileDTO.getPremiumAccount());

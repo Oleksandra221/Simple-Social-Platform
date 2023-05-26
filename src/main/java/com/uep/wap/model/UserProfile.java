@@ -11,6 +11,10 @@ public class UserProfile{
     @Id
     @Column(name ="id")
     private long id;
+    @Column(name ="user_name")
+    private String name;
+    @Column(name ="user_surname")
+    private String surname;
     @Column(name ="username")
     private String username;
 
@@ -56,6 +60,38 @@ public class UserProfile{
         return id;
     }
     public UserProfile(){
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public List<PostImage> getPost_images() {
+        return post_images;
+    }
+
+    public void setPost_images(List<PostImage> post_images) {
+        this.post_images = post_images;
+    }
+
+    public List<BackgroundImage> getBackground_images() {
+        return background_images;
+    }
+
+    public void setBackground_images(List<BackgroundImage> background_images) {
+        this.background_images = background_images;
     }
 
     public String getEmail() {
