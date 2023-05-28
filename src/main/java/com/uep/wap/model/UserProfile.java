@@ -5,9 +5,14 @@ import java.sql.Date;
 import java.util.List;
 import com.uep.wap.model.ProfileImages;
 
+
+
 @Entity
 @Table(name="userProfile")
 public class UserProfile{
+
+    public enum Zodiac_sign {ARIES, TAURUS, GEMINI, CANCER, LEO, VIRGO, LIBRA, SCORPIO, SAGITTARIUS, CAPRICORN, AQUARIUS, PISCES}
+
     @Id
     @Column(name ="id")
     private long id;
@@ -27,6 +32,9 @@ public class UserProfile{
 
     @Column(name ="password")
     private String password; // zaimplementowac haszowanie hasla
+
+    @Column(name ="zodiac_sign")
+    private Zodiac_sign zodiac_sign;
 
 //    @ManyToOne
 //    @JoinColumn(name = "emojis_id")

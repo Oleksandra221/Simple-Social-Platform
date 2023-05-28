@@ -1,13 +1,13 @@
-package com.uep.wap.model;
+package com.uep.wap.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import com.uep.wap.model.UserProfile;
+
 import java.util.Map;
 
-public class Horoscope {
-    @Id
-    @Column(name ="horoscope_id")
+public class HoroscopeDTO {
     private long horoscope_id;
+
+    private Map<UserProfile.Zodiac_sign, String> horoscopes;
 
     public long getHoroscope_id() {
         return horoscope_id;
@@ -24,9 +24,4 @@ public class Horoscope {
     public void setHoroscopes(Map<UserProfile.Zodiac_sign, String> horoscopes) {
         this.horoscopes = horoscopes;
     }
-
-    //@Column(name = "horoscope_date")
-    //private Date horoscope_date;
-    @Column(name ="horoscopes")
-    private Map<UserProfile.Zodiac_sign, String> horoscopes;
 }

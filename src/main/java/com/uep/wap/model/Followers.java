@@ -9,7 +9,7 @@ public class Followers {
     @Column(name = "user_id")
     private long user_id;
     @Column(name = "followers")
-    private int followers;
+    private List<int> followers;
 
     @OneToOne()
     @PrimaryKeyJoinColumn
@@ -23,11 +23,11 @@ public class Followers {
         this.user_id = user_id;
     }
 
-    public int getFollowers() {
+    public List<int> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(int followers) {
+    public void setFollowers(List<int> followers) {
         this.followers = followers;
     }
 
