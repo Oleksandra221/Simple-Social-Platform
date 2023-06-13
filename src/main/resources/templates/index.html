@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GFG</title>
+</head>
+<body>
+<div id="one" align="center">
+    <h1 th:text="${message}">
+    </h1>
+</div>
+
+<div id="two" align="center">
+    <form action="/login" method="get" target="_blank">
+        <button>Log In</button>
+    </form>
+    <h4>Not regestered?</h4>
+    <form action="/register" method="get" target="_blank">
+        <button>Register</button>
+    </form>
+</div>
+</body>
+</html>
