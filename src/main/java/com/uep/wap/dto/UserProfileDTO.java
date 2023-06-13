@@ -4,10 +4,10 @@ import com.uep.wap.model.BackgroundImage;
 import com.uep.wap.model.Emojis;
 import com.uep.wap.model.PostImage;
 import com.uep.wap.model.ProfileImages;
+import lombok.Data;
 
 import java.sql.Date;
 import java.util.List;
-
 public class UserProfileDTO {
 
      private long id;

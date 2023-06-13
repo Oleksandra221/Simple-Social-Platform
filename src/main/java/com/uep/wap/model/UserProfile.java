@@ -9,13 +9,14 @@ import com.uep.wap.model.ProfileImages;
 @Table(name="userProfile")
 public class UserProfile{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
     private long id;
-    @Column(name ="user_name")
+    @Column(name ="user_name", nullable=false)
     private String name;
-    @Column(name ="user_surname")
+    @Column(name ="user_surname", nullable=false)
     private String surname;
-    @Column(name ="username")
+    @Column(name ="username", nullable=false, unique=true)
     private String username;
 
     @Column(name ="description")
@@ -26,10 +27,10 @@ public class UserProfile{
     @Column(name ="birthDate")
     private Date birthDate;
 
-    @Column(name ="email")
+    @Column(name ="email", nullable=false, unique=true)
     private String email;
 
-    @Column(name ="password")
+    @Column(name ="password", nullable=false)
     private String password; // zaimplementowac haszowanie hasla
 
 //    @ManyToOne
@@ -51,7 +52,6 @@ public class UserProfile{
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<BackgroundImage> background_images;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     public void setId(long id){
         this.id = id;

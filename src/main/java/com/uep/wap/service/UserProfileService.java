@@ -6,21 +6,32 @@ import com.uep.wap.dto.UserProfileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+//import org.springframework.security.crypto.password.PasswordEncoder;
 @Service
-public class UserProfileService {
+public class UserProfileService implements IUserProfileService{
 
     @Autowired
     private UserProfileRepository userProfileRepository;
+//    private PasswordEncoder passwordEncoder;
 
     // To DO: to figure out how to add emojis
+    @Override
     public void addUser(UserProfileDTO userProfileDTO) {
         UserProfile user = new UserProfile();
+//        user.setId(userProfileDTO.getId());
+//        System.out.println("id = " + user.getId());
         user.setName(userProfileDTO.getName());
+        System.out.println("name = " + user.getName());
         user.setSurname(userProfileDTO.getSurname());
+        System.out.println("surname = " + user.getSurname());
         user.setUsername(userProfileDTO.getUsername());
         user.setDescription(userProfileDTO.getDescription());
 //        user.setPremiumAccount(userProfileDTO.getPremiumAccount());
-        user.setBirthDate(userProfileDTO.getBirthDate());
+//        user.setBirthDate(userProfileDTO.getBirthDate());
         user.setEmail(userProfileDTO.getEmail());
         user.setPassword(userProfileDTO.getPassword());
 
@@ -28,8 +39,21 @@ public class UserProfileService {
         System.out.println("User added!");
     }
 
-    public Iterable<UserProfile> getAllUsers() {
-        return userProfileRepository.findAll();
+    @Override
+    public UserProfile findUserByEmail(String email) {
+        return userProfileRepository.findByEmail(email);
+    }
+    @Override
+    public List<UserProfile> getAllUsers() {
+        List<UserProfile> users_list = new ArrayList<UserProfile>();
+        Iterable<UserProfile> users = userProfileRepository.findAll();
+        users.forEach(users_list::add);
+        return users_list;
     }
 
+    @Override
+    public void deleteUserByEmail(String email) {
+        System.out.println("delete user");
+         userProfileRepository.delete(findUserByEmail(email));
+    }
 }
