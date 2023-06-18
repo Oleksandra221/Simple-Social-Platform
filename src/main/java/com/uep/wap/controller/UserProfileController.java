@@ -1,6 +1,16 @@
 package com.uep.wap.controller;
+import com.uep.wap.configs.WebSecurityConfig;
+import com.uep.wap.controller.validators.LogInFormValidation;
+import com.uep.wap.controller.validators.RegistartionFormValidator;
+import com.uep.wap.controller.helpers.UserLogIn;
+import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.uep.wap.dto.UserProfileDTO;
@@ -10,29 +20,47 @@ import com.uep.wap.service.UserProfileService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 
 @Controller
 //@RequestMapping(path = "/api")
-public class UserProfileController {
+public class UserProfileController{
 
     private final UserProfileService userProfileService;
+    @Autowired
+    private RegistartionFormValidator registartionFormValidator;
 
-//    private  UserProfileDTO userProfileDTO;
+    @Autowired
+    private LogInFormValidation logInFormValidation;
+    @Autowired
+    private WebSecurityConfig securityConfig;
 
-//    private SignUpFormView signUpFormView;
+    private EmailValidator emailValidator = EmailValidator.getInstance();
 
     public UserProfileController(UserProfileService userProfileService) {
         this.userProfileService = userProfileService;
     }
 
-    // handler method to handle home page request
-//    @GetMapping("/index")
-//    public String home(){
-//        return "index";
-//    }
+    // Set a form validator
+    @InitBinder
+    protected void initBinder(WebDataBinder dataBinder) {
+        // Form target
+        System.out.println("initBinder()");
+        Object target = dataBinder.getTarget();
+        if (target == null) {
+            return;
+        }
+        System.out.println("Target=" + target);
+
+        if (target.getClass() == UserProfileDTO.class) {
+            dataBinder.setValidator(registartionFormValidator);
+        }
+        if (target.getClass() == UserLogIn.class) {
+            dataBinder.setValidator(logInFormValidation);
+        }
+        // ...
+    }
 
     @GetMapping("/index")
     public String getWelcomePage(Model model) {
@@ -54,26 +82,24 @@ public class UserProfileController {
 
     // handler method to handle user registration form submit request
     @PostMapping("/register")
-    public String registration(@Valid @ModelAttribute("user") UserProfileDTO user, // @Valid
+    public String registration(@ModelAttribute("user") @Validated UserProfileDTO user, // @Valid
                                BindingResult result,
                                Model model){
         System.out.println("registration func");
         System.out.println("userProfileDTO: " + user.getId() + ", " + user.getName()
                 + ", " + user.getSurname());
-        UserProfile existingUser = userProfileService.findUserByEmail(user.getEmail());
-
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
-            result.rejectValue("email", null,
-                    "There is already an account registered with the same email");
-        }
 
         if(result.hasErrors()){
+            System.out.println("result has errors");
             model.addAttribute("user", user);
-            return "/register";
+            return "register";
         }
+        PasswordEncoder encoder = securityConfig.passwordEncoder();
 
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setConfirmedPassword(encoder.encode(user.getConfirmedPassword()));
+        System.out.println("password = " + user.getPassword());
         userProfileService.addUser(user);
-//        return "successSignedUp";
         return "redirect:/register?success";
     }
 
@@ -94,8 +120,21 @@ public class UserProfileController {
 
     // handler method to handle login request
     @GetMapping("/login")
-    public String login(){
+    public String loginForm(Model model){
+        model.addAttribute("checkUser", new UserLogIn());
         return "login";
+    }
+
+    @PostMapping ("/login")
+    public String login(@ModelAttribute("checkUser") @Validated UserLogIn user, // @Valid
+                        BindingResult result,
+                        Model model){
+        if(result.hasErrors()){
+            System.out.println("result has errors log in");
+            model.addAttribute("checkUser", user);
+            return "redirect:/login?failure";
+        }
+        return "redirect:/login?success";
     }
 
 //    @GetMapping(path = "/users")

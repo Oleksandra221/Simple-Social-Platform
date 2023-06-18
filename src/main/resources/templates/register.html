@@ -17,7 +17,14 @@
             <div class="card-header">
                 <h2 class="text-center">Registration</h2>
             </div>
+            <div th:if="${errorMessage != null}"
+                 th:utext="${errorMessage}" class="error">...</div>
             <div class="card">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        You have successfully registered our app!
+                    </div>
+                </div>
                 <div class="card-body" >
                     <form
                             method="post"
@@ -33,6 +40,9 @@
                                     class="form-control"
                                     placeholder="Enter name"
                             />
+                            <div th:if="${#fields.hasErrors('name')}">
+                                <div class="alert alert-danger"> First name is required</div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="control-label"> Surname:</label>
@@ -44,6 +54,9 @@
                                     class="form-control"
                                     placeholder="Enter surname"
                             />
+                            <div th:if="${#fields.hasErrors('surname')}">
+                                <div class="alert alert-danger"> Last name is required</div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="control-label"> Username:</label>
@@ -55,6 +68,9 @@
                                     class="form-control"
                                     placeholder="Enter username"
                             />
+                            <div th:if="${#fields.hasErrors('username')}">
+                                <div class="alert alert-danger"> User name is required or already existed</div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="control-label"> Email</label>
@@ -66,6 +82,9 @@
                                     class="form-control"
                                     placeholder="Enter email address"
                             />
+                            <div th:if="${#fields.hasErrors('email')}">
+                                <div class="alert alert-danger"> Email is required or already used</div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="control-label"> Password</label>
@@ -77,20 +96,25 @@
                                     class="form-control"
                                     placeholder="Enter password"
                             />
+                            <div th:if="${#fields.hasErrors('password')}">
+                                <div class="alert alert-danger"> Password is required</div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="control-label"> Repeat Password</label>
                             <input
                                     type="password"
-                                    id="repeat_password"
-                                    name="password"
+                                    th:field = "*{confirmedPassword}"
                                     class="form-control"
                                     placeholder="Repeat password"
                             />
+                            <div th:if="${#fields.hasErrors('confirmedPassword')}">
+                                <div class="alert alert-danger"> Confirm password is required or does not match the original one</div>
+                            </div>
                         </div>
                         <div class="form-group mb-3" th:align="center">
                             <button type="submit" class="btn btn-primary">
-                                <a th:href="@{/register}" th:color="white">Submit</a>
+                                Submit
                             </button>
                             <span> Already signed up ?
                                 <a th:href="@{/login}">Log in here</a>

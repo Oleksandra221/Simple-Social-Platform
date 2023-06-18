@@ -1,4 +1,4 @@
-package com.uep.wap.service;
+package com.uep.wap.service.interfaces;
 
 import com.uep.wap.dto.UserProfileDTO;
 import com.uep.wap.model.UserProfile;
@@ -11,4 +11,6 @@ public interface IUserProfileService {
 
     public UserProfile findUserByEmail(String email);
     public void deleteUserByEmail(String email);
+
+    public UserProfile findByUsername(String username);
 }

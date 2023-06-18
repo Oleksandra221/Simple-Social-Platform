@@ -33,9 +33,20 @@ public class UserProfile{
     @Column(name ="password", nullable=false)
     private String password; // zaimplementowac haszowanie hasla
 
+    @Column(name ="confirmed_password", nullable=false)
+    private String confirmedPassword;
+
 //    @ManyToOne
 //    @JoinColumn(name = "emojis_id")
 //    private Emojis emojis;
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "emojis",
@@ -52,6 +63,11 @@ public class UserProfile{
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<BackgroundImage> background_images;
 
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "followers",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private List<UserProfile> followers;
 
     public void setId(long id){
         this.id = id;
@@ -60,6 +76,22 @@ public class UserProfile{
         return id;
     }
     public UserProfile(){
+    }
+
+//    public List<UserProfile> getFollowers() {
+//        return followers;
+//    }
+//
+//    public void setFollowers(List<UserProfile> followers) {
+//        this.followers = followers;
+//    }
+
+    public String getConfirmedPassword() {
+        return confirmedPassword;
+    }
+
+    public void setConfirmedPassword(String confirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
     }
 
     public String getName() {

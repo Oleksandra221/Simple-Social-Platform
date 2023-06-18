@@ -3,19 +3,20 @@ package com.uep.wap.service;
 import com.uep.wap.model.UserProfile;
 import com.uep.wap.repository.UserProfileRepository;
 import com.uep.wap.dto.UserProfileDTO;
+import com.uep.wap.service.interfaces.IUserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 //import org.springframework.security.crypto.password.PasswordEncoder;
 @Service
-public class UserProfileService implements IUserProfileService{
+public class UserProfileService implements IUserProfileService {
 
     @Autowired
     private UserProfileRepository userProfileRepository;
+
 //    private PasswordEncoder passwordEncoder;
 
     // To DO: to figure out how to add emojis
@@ -34,6 +35,7 @@ public class UserProfileService implements IUserProfileService{
 //        user.setBirthDate(userProfileDTO.getBirthDate());
         user.setEmail(userProfileDTO.getEmail());
         user.setPassword(userProfileDTO.getPassword());
+        user.setConfirmedPassword(userProfileDTO.getConfirmedPassword());
 
         userProfileRepository.save(user);
         System.out.println("User added!");
@@ -55,5 +57,10 @@ public class UserProfileService implements IUserProfileService{
     public void deleteUserByEmail(String email) {
         System.out.println("delete user");
          userProfileRepository.delete(findUserByEmail(email));
+    }
+    @Override
+    public UserProfile findByUsername(String username)
+    {
+        return userProfileRepository.findByUsername(username);
     }
 }
