@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.uep.wap.model.UserProfile;
+import com.uep.wap.repository.UserProfileRepository;
 import com.uep.wap.dto.UserProfileDTO;
 
 import com.uep.wap.model.UserProfile;
@@ -60,6 +62,11 @@ public class UserProfileController{
             dataBinder.setValidator(logInFormValidation);
         }
         // ...
+
+   /* @GetMapping(path = "/users")
+    public Iterable<UserProfile> getAllUsers(){
+        return userProfileService.getAllUsers();
+>>>>>>> Stashed changes
     }
 
     @GetMapping("/index")
@@ -71,6 +78,7 @@ public class UserProfileController{
         return "index";
     }
 
+<<<<<<< Updated upstream
     // handler method to handle user registration form request
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
@@ -202,6 +210,14 @@ public class UserProfileController{
 //            exitSignUpForm();
 //        }
 //    }
+=======
+
+    public String profile(){
+        return "profile";
+    } */
+
+
+
 
 //    @PostMapping(path = "/students")
 //    public String updateStudents(StudentDTO studentDTO){
