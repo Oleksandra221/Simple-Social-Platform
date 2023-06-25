@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
     List<Post> findByEmail(String email);
+    Post findById(long id);
+    void deleteById(long id);
+
 }

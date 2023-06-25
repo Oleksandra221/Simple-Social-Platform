@@ -13,7 +13,6 @@ public class PostImageService {
 
     private PostImageRepository postImageRepository;
 
-    // To DO: to figure out how to add emojis
     public void addPostImage(PostImageDTO post_image_dto) {
         PostImage post_images = new PostImage();
         post_images.setId(post_image_dto.getId());
@@ -21,7 +20,6 @@ public class PostImageService {
         post_images.setUserProfile(post_image_dto.getUserProfile());
 
         postImageRepository.save(post_images);
-        System.out.println("Post image added!");
     }
 
     public Iterable<PostImage> getAllPostImages() {

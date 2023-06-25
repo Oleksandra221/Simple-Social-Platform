@@ -20,7 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     public PasswordEncoder passwordEncoder() {
         int strength = 10;
-        System.out.println("passwordEncoder");
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
         return bCryptPasswordEncoder;
     }
@@ -31,17 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Empty code!
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/", "/home", "/js/**", "/css/**","chat.css").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/chat")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
     }
 
 }

@@ -15,7 +15,6 @@ public class WebConfiguration implements WebMvcConfigurer{
 
     @Bean
     public MessageSource messageSource() {
-        System.out.println("messageSource");
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         // Load file: validation.properties
         messageSource.setBasename("classpath:validation");

@@ -33,7 +33,6 @@ public class RegistartionFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        System.out.println("validate func");
         UserProfileDTO user = (UserProfileDTO) target;
 
         // Check the fields of userProfileDTO.

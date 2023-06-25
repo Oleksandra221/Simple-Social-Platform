@@ -68,7 +68,7 @@
                     <div class="profile">
                         <div class="avatar">
                             <img
-                                    src="https://hips.hearstapps.com/hmg-prod/images/prince-harry-duke-of-sussex-departs-after-giving-evidence-news-photo-1686075489.jpg?crop=0.961xw:1.00xh;0.00850xw,0&resize=1200:*"
+                                    src="foka.jpg"
                                     alt="Circle Image"
                                     class="img-raised rounded-circle img-fluid"
                             />
@@ -187,6 +187,12 @@
                                     <div style="padding: 10px; border: 2px solid red;">
                                         <p th:text="${checkUser}"/>
                                         <p th:text="${new_post}"/>
+                                        <form
+                                                th:object="${new_post}"
+                                                th:action="@{/deletePost/{id}(id=${new_post.getId()})}"
+                                                method="post">
+                                            <button type="hidden">Delete</button>
+                                        </form>
                                     </div>
                                 </div>
                                 </form>

@@ -24,10 +24,13 @@ public class PostService {
         post.setEmail(postDTO.getEmail());
 
         postRepository.save(post);
-        System.out.println(post.getSurname() + ": " + post.getContent());
     }
     public List<Post> findPostsByEmail(String email) {
         return postRepository.findByEmail(email);
     }
+
+    public Post findPostsById(long id) {return postRepository.findById(id);}
+
+    public void deletePostById(long id) {postRepository.deleteById(id);};
 }
 

@@ -75,7 +75,7 @@ public class UserProfile{
             inverseJoinColumns={@JoinColumn(name="ParentId")})
     private List<UserProfile> following;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "posts",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id"))

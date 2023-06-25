@@ -25,12 +25,4 @@ public class EmojisController {
         emojisService.addEmoji(emojisDTO);
         return "emoji added!";
     }
-
-//    @PostMapping(path = "/background_image")
-//    public String updateBac(BackgroundImageDTO backgroundImageDTO){
-//        BackgroundImage background_image = bac.findById(backgroundImageDTO.getId()).get();
-//
-//        backgroundImageService.addBackgroundImage(backgroundImageDTO);
-//        return "Students added!";
-//    }
 }

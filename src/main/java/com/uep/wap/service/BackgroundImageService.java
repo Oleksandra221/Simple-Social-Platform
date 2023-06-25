@@ -10,7 +10,6 @@ public class BackgroundImageService {
 
     private BackgroundImagesRepository backgroundImagesRepository;
 
-    // To DO: to figure out how to add emojis
     public void addBackgroundImage(BackgroundImageDTO background_image_dto) {
         BackgroundImage background_images = new BackgroundImage();
         background_images.setId(background_image_dto.getId());
@@ -18,7 +17,6 @@ public class BackgroundImageService {
         background_images.setUserProfile(background_image_dto.getUserProfile());
 
         backgroundImagesRepository.save(background_images);
-        System.out.println("Background image added!");
     }
 
     public Iterable<BackgroundImage> getAllBackgroundImages() {

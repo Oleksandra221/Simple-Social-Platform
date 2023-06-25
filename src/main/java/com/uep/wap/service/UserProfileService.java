@@ -10,35 +10,24 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.springframework.security.crypto.password.PasswordEncoder;
 @Service
 public class UserProfileService implements IUserProfileService {
 
     @Autowired
     private UserProfileRepository userProfileRepository;
 
-//    private PasswordEncoder passwordEncoder;
-
-    // To DO: to figure out how to add emojis
     @Override
     public void addUser(UserProfileDTO userProfileDTO) {
         UserProfile user = new UserProfile();
-//        user.setId(userProfileDTO.getId());
-//        System.out.println("id = " + user.getId());
         user.setName(userProfileDTO.getName());
-        System.out.println("name = " + user.getName());
         user.setSurname(userProfileDTO.getSurname());
-        System.out.println("surname = " + user.getSurname());
         user.setUsername(userProfileDTO.getUsername());
         user.setDescription(userProfileDTO.getDescription());
-//        user.setPremiumAccount(userProfileDTO.getPremiumAccount());
-//        user.setBirthDate(userProfileDTO.getBirthDate());
         user.setEmail(userProfileDTO.getEmail());
         user.setPassword(userProfileDTO.getPassword());
         user.setConfirmedPassword(userProfileDTO.getConfirmedPassword());
 
         userProfileRepository.save(user);
-        System.out.println("User added!");
     }
 
     @Override
@@ -55,7 +44,6 @@ public class UserProfileService implements IUserProfileService {
 
     @Override
     public void deleteUserByEmail(String email) {
-        System.out.println("delete user");
          userProfileRepository.delete(findUserByEmail(email));
     }
     @Override

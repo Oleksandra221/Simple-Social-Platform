@@ -31,7 +31,6 @@ public class LogInFormValidation implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        System.out.println("validate log in func");
         UserLogIn user = (UserLogIn) target;
         PasswordEncoder encoder = securityConfig.passwordEncoder();
         // Check the fields of userProfileDTO.
@@ -40,25 +39,20 @@ public class LogInFormValidation implements Validator {
 
         if (!this.emailValidator.isValid(user.getEmail())) {
             // Invalid email.
-            System.out.println("validate log in func Invalid email.");
             errors.rejectValue("email", "Pattern.userProfileDTO.email");
         }
 
         UserProfile dbUserByEmail = userProfileService.findUserByEmail(user.getEmail());
         if (dbUserByEmail == null) {
             // Email is not used
-            System.out.println("validate log in func Email is not used.");
             errors.rejectValue("email", "Duplicate.UserLogIn.email");
         }
         else {
             String existing_password = dbUserByEmail.getPassword();
-//            if (!encoder.matches(user.getPassword(), encoder.encode(existing_password))) {
-                if (!encoder.matches(user.getPassword(), encoder.encode(existing_password))) {
-                System.out.println("passwords do not match");
+            if (!encoder.matches(user.getPassword(), existing_password)) {
                 errors.rejectValue("password", "Similarity.UserLogIn.password");
             }
             else if (encoder.matches(user.getPassword(), existing_password)) {
-                System.out.println("else if");
                 user.setPassword(encoder.encode(user.getPassword()));
             }
         }

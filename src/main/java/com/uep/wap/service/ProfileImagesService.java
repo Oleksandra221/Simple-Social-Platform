@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class ProfileImagesService {
     private ProfileImagesRepository profileImagesRepository;
 
-    // To DO: to figure out how to add emojis
     public void addProfileImage(ProfileImagesDTO profile_image_dto) {
         ProfileImages profile_images = new ProfileImages();
         profile_images.setId(profile_image_dto.getId());
@@ -18,7 +17,6 @@ public class ProfileImagesService {
         profile_images.setUserProfile(profile_image_dto.getUserProfile());
 
         profileImagesRepository.save(profile_images);
-        System.out.println("Profile image added!");
     }
 
     public Iterable<ProfileImages> getAllProfileImages() {
