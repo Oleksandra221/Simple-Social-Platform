@@ -1,9 +1,6 @@
 package com.uep.wap.dto;
 
-import com.uep.wap.model.BackgroundImage;
-import com.uep.wap.model.Emojis;
-import com.uep.wap.model.PostImage;
-import com.uep.wap.model.ProfileImages;
+import com.uep.wap.model.*;
 import lombok.Data;
 
 import java.sql.Date;
@@ -27,6 +24,8 @@ public class UserProfileDTO {
 
      private String password; // zaimplementowac haszowanie hasla
 
+     private String confirmedPassword;
+
      private List<Emojis> emojis;
 
      private List<ProfileImages> profile_images;
@@ -34,6 +33,8 @@ public class UserProfileDTO {
      private List<PostImage> post_images;
 
      private List<BackgroundImage> background_images;
+
+     private List<UserProfile> followers;
 
      public long getId() {
           return id;
@@ -45,6 +46,22 @@ public class UserProfileDTO {
 
      public String getUsername() {
           return username;
+     }
+
+     public String getConfirmedPassword() {
+          return confirmedPassword;
+     }
+
+     public void setConfirmedPassword(String confirmedPassword) {
+          this.confirmedPassword = confirmedPassword;
+     }
+
+     public List<UserProfile> getFollowers() {
+          return followers;
+     }
+
+     public void setFollowers(List<UserProfile> followers) {
+          this.followers = followers;
      }
 
      public void setUsername(String username) {

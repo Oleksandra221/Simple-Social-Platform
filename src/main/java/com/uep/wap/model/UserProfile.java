@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 import com.uep.wap.model.ProfileImages;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Entity
 @Table(name="userProfile")
@@ -40,14 +42,6 @@ public class UserProfile{
 //    @JoinColumn(name = "emojis_id")
 //    private Emojis emojis;
 
-    @Override
-    public String toString() {
-        return "UserProfile{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
-    }
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "emojis",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -69,6 +63,24 @@ public class UserProfile{
 //            inverseJoinColumns = @JoinColumn(name = "user_id"))
 //    private List<UserProfile> followers;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="UserRel",
+            joinColumns={@JoinColumn(name="ParentId")},
+            inverseJoinColumns={@JoinColumn(name="UserId")})
+    private List<UserProfile> followers;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="UserRel",
+            joinColumns={@JoinColumn(name="UserId")},
+            inverseJoinColumns={@JoinColumn(name="ParentId")})
+    private List<UserProfile> following;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "posts",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private List<Post> posts;
+
     public void setId(long id){
         this.id = id;
     }
@@ -78,7 +90,23 @@ public class UserProfile{
     public UserProfile(){
     }
 
-//    public List<UserProfile> getFollowers() {
+    public List<UserProfile> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<UserProfile> followers) {
+        this.followers = followers;
+    }
+
+    public List<UserProfile> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<UserProfile> following) {
+        this.following = following;
+    }
+
+    //    public List<UserProfile> getFollowers() {
 //        return followers;
 //    }
 //
@@ -188,6 +216,19 @@ public class UserProfile{
 
     public void setProfile_images(List<ProfileImages> profile_images) {
         this.profile_images = profile_images;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + surname;
     }
 }
 

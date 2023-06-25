@@ -22,6 +22,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     // so that alternative messaging options may be used if WebSockets are not available.
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        System.out.println("registerStompEndpoints");
         registry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS();
     }
     // configures a simple in-memory message broker with one destination for
@@ -30,6 +31,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     // annotated with @MessageMapping
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+        System.out.println("configureMessageBroker");
         registry.setApplicationDestinationPrefixes("/app").enableSimpleBroker("/user");
     }
 
@@ -37,6 +39,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     // which is used by Spring to convert chat messages from/to JSON.
     @Override
     public boolean configureMessageConverters(List<MessageConverter> messageConverters) {
+        System.out.println("configureMessageConverters");
         DefaultContentTypeResolver resolver = new DefaultContentTypeResolver();
         resolver.setDefaultMimeType(MimeTypeUtils.APPLICATION_JSON);
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();

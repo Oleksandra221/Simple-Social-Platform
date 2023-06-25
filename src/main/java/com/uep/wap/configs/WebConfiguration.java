@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // the Spring automatically load the
 // contents of the validation.properties file to memory.
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer{
 
     @Bean

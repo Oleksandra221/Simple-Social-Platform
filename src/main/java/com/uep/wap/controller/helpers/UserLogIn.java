@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.List;
 
 
 public class UserLogIn {
@@ -11,6 +12,12 @@ public class UserLogIn {
     private String email;
 
     private String password;
+
+    private String name;
+
+    private String surname;
+
+    private List<String> posts;
 
     public String getEmail() {
         return email;
@@ -26,5 +33,34 @@ public class UserLogIn {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public List<String> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<String> posts) {
+        this.posts = posts;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + surname + " " + email;
     }
 }

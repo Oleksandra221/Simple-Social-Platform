@@ -22,8 +22,8 @@
                     <div class="alert alert-danger"> Email or password is incorrect</div>
                 </div>
                 <div th:if="${param.success}">
-                    <div class="alert alert-info">
-                        You have successfully logged in!
+                    <div >
+                        <a th:href="@{/userProfile}"/>
                     </div>
                 </div>
                 <div class="card-body">
@@ -31,7 +31,7 @@
                             method="post"
                             role="form"
                             th:object="${checkUser}"
-                            th:action="@{/login}"
+                            th:action="@{/userProfile}"
                             class="form-horizontal"
                     >
                         <div class="form-group mb-3">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User Profile</title>
@@ -74,17 +74,14 @@
                             />
                         </div>
                         <div class="name">
-                            <h3 class="title">Christian Louboutin</h3>
+                                <p th:text="${checkUser}"/>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="description text-center">
                 <p>
-                    An artist of considerable range, Chet Faker — the name taken by
-                    Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                    and records all of his own music, giving it a warm, intimate feel
-                    with a solid groove structure.
+                    Tell more about yourself!
                 </p>
             </div>
             <div class="row">
@@ -162,8 +159,38 @@
                         <div class="col-md-3 ml-auto" align="center">
                             <label class="control-label">
                             </label>
-                            <input type="text" class="form-control" placeholder="Share your thoughts"/>
-                            <button>Public</button>
+                            <div class="name">
+                                <p th:text="${checkUser}"/>
+                            </div>
+                            <form
+                                method="post"
+                                th:object="${post}"
+                                th:action="@{/userProfile/addPost/{checkUser}(checkUser = ${checkUser.email})}"
+                                class="form-horizontal"
+                            >
+                                <input
+                                    type="text"
+                                    th:field="*{content}"
+                                    class="form-control"
+                                    placeholder="Share your thoughts"
+                                />
+                                <button type="submit" class="btn btn-primary">Public</button>
+                            </form>
+                            <div th:if="${checkUser!=null and !checkUser.getPosts().isEmpty()}">
+                                <form
+                                        method="loggedUser"
+                                        th:object="${checkUser}"
+                                        th:action="@{/userProfile/addPost/{checkUser}(checkUser = ${checkUser.email})}"
+                                        class="form-horizontal"
+                                >
+                                <div th:each="new_post : ${checkUser.getPosts()}">
+                                    <div style="padding: 10px; border: 2px solid red;">
+                                        <p th:text="${checkUser}"/>
+                                        <p th:text="${new_post}"/>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

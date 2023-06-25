@@ -3,6 +3,7 @@ package com.uep.wap.model;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="post")
@@ -16,6 +17,12 @@ public class Post {
     private String user_name;
     @Column(name="surname")
     private String surname;
+
+    @Column(name="email")
+    private String email;
+
+    @ManyToMany(mappedBy = "posts")
+    private List<UserProfile> users;
 
     public long getId() {
         return id;
@@ -47,5 +54,18 @@ public class Post {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return content;
     }
 }
